@@ -32,8 +32,8 @@ export const Interface = () => {
               sx={{
                 width: "200px",
               }}
-              min={15}
-              max={30}
+              min={3}
+              max={8}
               value={tableWidth}
               onChange={(e) => setTableWidth(e.target.value)}
               valueLabelDisplay="auto"

@@ -26,7 +26,7 @@ export function Table(props) {
     }, [legsColor]);
   
     useFrame((_state, delta) => {
-      const tableWidthScale = tableWidth / 15;
+      const tableWidthScale = tableWidth / 3;
       const targetScale = new Vector3(0.15, 0.08, 15 * tableWidthScale);
       
   
