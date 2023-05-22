@@ -26,15 +26,16 @@ export function Table(props) {
     }, [legsColor]);
   
     useFrame((_state, delta) => {
-      const tableWidthScale = tableWidth / 100;
-      const targetScale = new Vector3( tableWidthScale, 1, 1);
+      const tableWidthScale = tableWidth / 15;
+      const targetScale = new Vector3(0.15, 0.08, 15 * tableWidthScale);
+      
   
       plate.current.scale.lerp(targetScale, delta * ANIM_SPEED);
   
-      const targetLeftPosition = new Vector3(-1.5 * tableWidthScale, 0, 0);
+      const targetLeftPosition = new Vector3(-14.72 * tableWidthScale, 5, -0.07);
       leftLegs.current.position.lerp(targetLeftPosition, delta * ANIM_SPEED);
   
-      const targetRightPosition = new Vector3(1.5 * tableWidthScale, 0, 0);
+      const targetRightPosition = new Vector3(14.74 * tableWidthScale, 5, -0.07);
       rightLegs.current.position.lerp(targetRightPosition, delta * ANIM_SPEED);
     });
 

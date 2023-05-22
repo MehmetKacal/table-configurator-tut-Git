@@ -5,7 +5,7 @@ const ConfiguratorContext = createContext();
 export const ConfiguratorProvider = ({ children }) => {
   const [legs, setLegs] = useState(0);
   const [legsColor, setLegsColor] = useState("#777777");
-  const [tableWidth, setTableWidth] = useState(100);
+  const [tableWidth, setTableWidth] = useState(15);
   return (
     <ConfiguratorContext.Provider
       value={{
