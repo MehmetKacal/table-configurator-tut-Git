@@ -23,13 +23,22 @@ export function Table(props) {
     const Poly01 = useRef();
     const Poly02 = useRef();
     const Poly03 = useRef();
+    const EindLiggerRechts = useRef();
+    const EindLiggerLinks = useRef();
+    const Ligger01 = useRef();
+    const Ligger02 = useRef();
     
     var tableWidthBase = 3
-    var Poly04_posX = -2.83 + ((tableWidth/3-1)*-14.72) + 9.72
-    var Poly05_posX = -2.83 + ((tableWidth/3-1)*-14.72) + 9.72 * 2
-    var Poly06_posX = -2.83 + ((tableWidth/3-1)*-14.72) + 9.72 * 3
-    var Poly07_posX = -2.83 + ((tableWidth/3-1)*-14.72) + 9.72 * 4
-    var Poly08_posX = -2.83 + ((tableWidth/3-1)*-14.72) + 9.72 * 5
+    var Poly04_posX = -2.83 + ((tableWidth/tableWidthBase-1)*-14.72) + 9.72
+    var Poly05_posX = -2.83 + ((tableWidth/tableWidthBase-1)*-14.72) + 9.72 * 2
+    var Poly06_posX = -2.83 + ((tableWidth/tableWidthBase-1)*-14.72) + 9.72 * 3
+    var Poly07_posX = -2.83 + ((tableWidth/tableWidthBase-1)*-14.72) + 9.72 * 4
+    var Poly08_posX = -2.83 + ((tableWidth/tableWidthBase-1)*-14.72) + 9.72 * 5
+    var Ligger04_posX = -2.83 + ((tableWidth/tableWidthBase-1)*-14.72) + 9.72
+    var Ligger05_posX = -2.83 + ((tableWidth/tableWidthBase-1)*-14.72) + 9.72 * 2
+    var Ligger06_posX = -2.83 + ((tableWidth/tableWidthBase-1)*-14.72) + 9.72 * 3
+    var Ligger07_posX = -2.83 + ((tableWidth/tableWidthBase-1)*-14.72) + 9.72 * 4
+    var Ligger08_posX = -2.83 + ((tableWidth/tableWidthBase-1)*-14.72) + 9.72 * 5
 
     useEffect(() => {
       materials.Metal.color = new Three.Color(legsColor);
@@ -57,8 +66,15 @@ export function Table(props) {
       const Poly03Position = new Vector3(-12.65 + ((tableWidthScale-1)*-14.72), 12.06, -15);
       Poly03.current.position.lerp(Poly03Position, delta * ANIM_SPEED);
 
-      // const Poly04Position = new Vector3(-2.83 + ((tableWidthScale-1)*-14.72), 12.06, -15);
-      // Poly04.current.position.lerp(Poly04Position, delta * ANIM_SPEED);
+      const EindLiggerRechtsPosition = new Vector3(14.8 + ((tableWidthScale-1)*14.74), 11.87, -14.9);
+      EindLiggerRechts.current.position.lerp(EindLiggerRechtsPosition, delta * ANIM_SPEED);
+      const EindLiggerLinksPosition = new Vector3(-14.75 + ((tableWidthScale-1)*-14.72), 12.01, -14.78);
+      EindLiggerLinks.current.position.lerp(EindLiggerLinksPosition, delta * ANIM_SPEED);
+      const Ligger01Position = new Vector3(5.15 + ((tableWidthScale-1)*14.74), 12.06, -15);
+      Ligger01.current.position.lerp(Ligger01Position, delta * ANIM_SPEED);
+      const Ligger02Position = new Vector3(-4.69 + ((tableWidthScale-1)*-14.72), 12.06, -15);
+      Ligger02.current.position.lerp(Ligger02Position, delta * ANIM_SPEED);
+
     });
 
     
@@ -114,7 +130,15 @@ export function Table(props) {
             position={[Poly04_posX, 12.06, -15]}
             rotation={[0.14, 0, 0]}
             scale={[0.6, 0.04, 15]}
-            // ref={Poly04}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Ligger01.geometry}
+            material={nodes.Ligger01.material}
+            position={[Ligger04_posX, 12.06, -15]}
+            rotation={[0.14, 0, 0]}
+            scale={[0.18, 1.58, 14.97]}
           />
         </>
     )}
@@ -128,7 +152,15 @@ export function Table(props) {
             position={[Poly05_posX, 12.06, -15]}
             rotation={[0.14, 0, 0]}
             scale={[0.6, 0.04, 15]}
-            // ref={Poly04}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Ligger01.geometry}
+            material={nodes.Ligger01.material}
+            position={[Ligger05_posX, 12.06, -15]}
+            rotation={[0.14, 0, 0]}
+            scale={[0.18, 1.58, 14.97]}
           />
         </>
     )}
@@ -142,7 +174,15 @@ export function Table(props) {
             position={[Poly06_posX, 12.06, -15]}
             rotation={[0.14, 0, 0]}
             scale={[0.6, 0.04, 15]}
-            // ref={Poly04}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Ligger01.geometry}
+            material={nodes.Ligger01.material}
+            position={[Ligger06_posX, 12.06, -15]}
+            rotation={[0.14, 0, 0]}
+            scale={[0.18, 1.58, 14.97]}
           />
         </>
     )}
@@ -156,7 +196,15 @@ export function Table(props) {
             position={[Poly07_posX, 12.06, -15]}
             rotation={[0.14, 0, 0]}
             scale={[0.6, 0.04, 15]}
-            // ref={Poly04}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Ligger01.geometry}
+            material={nodes.Ligger01.material}
+            position={[Ligger07_posX, 12.06, -15]}
+            rotation={[0.14, 0, 0]}
+            scale={[0.18, 1.58, 14.97]}
           />
         </>
     )}
@@ -170,7 +218,15 @@ export function Table(props) {
             position={[Poly08_posX, 12.06, -15]}
             rotation={[0.14, 0, 0]}
             scale={[0.6, 0.04, 15]}
-            // ref={Poly04}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Ligger01.geometry}
+            material={nodes.Ligger01.material}
+            position={[Ligger08_posX, 12.06, -15]}
+            rotation={[0.14, 0, 0]}
+            scale={[0.18, 1.58, 14.97]}
           />
         </>
     )}
@@ -192,6 +248,7 @@ export function Table(props) {
         position={[5.15, 12.06, -15]}
         rotation={[0.14, 0, 0]}
         scale={[0.18, 1.58, 14.97]}
+        ref={Ligger01}
       />
       <mesh
         castShadow
@@ -201,6 +258,7 @@ export function Table(props) {
         position={[14.8, 11.87, -14.9]}
         rotation={[0.14, 0, 0]}
         scale={[0.18, 1.58, 14.97]}
+        ref={EindLiggerRechts}
       />
       <mesh
         castShadow
@@ -210,6 +268,7 @@ export function Table(props) {
         position={[-4.69, 12.06, -15]}
         rotation={[0.14, 0, 0]}
         scale={[0.18, 1.58, 14.97]}
+        ref={Ligger02}
       />
       <mesh
         castShadow
@@ -219,6 +278,7 @@ export function Table(props) {
         position={[-14.75, 12.01, -14.78]}
         rotation={[0.14, 0, 0]}
         scale={[0.18, 1.58, 14.97]}
+        ref={EindLiggerLinks}
       />
       {legs === 0 && (
         <>
