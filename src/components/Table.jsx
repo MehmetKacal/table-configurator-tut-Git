@@ -18,6 +18,7 @@ export function Table(props) {
     const { legs, legsColor, tableWidth } = useConfigurator();
     
     const GootProfiel = useRef();
+    const Huis = useRef();
     const leftLegs = useRef();
     const rightLegs = useRef();
     const Poly01 = useRef();
@@ -27,6 +28,7 @@ export function Table(props) {
     const EindLiggerLinks = useRef();
     const Ligger01 = useRef();
     const Ligger02 = useRef();
+    const rightWindowPanel = useRef();
     
     var tableWidthBase = 3
     // var DimensionWidthPolyPlate = 9.72
@@ -49,18 +51,21 @@ export function Table(props) {
     useFrame((_state, delta) => {
       const tableWidthScale = tableWidth / tableWidthBase;
 
-
+      // GootProfiel Scaling
       const targetScale = new Vector3(0.15, 0.08, 14.76 * tableWidthScale);
-      
-  
       GootProfiel.current.scale.lerp(targetScale, delta * ANIM_SPEED);
-  
+      
+      // House scaling
+      const HuisScale = new Vector3(15 * tableWidthScale, 1, 0.18);
+      Huis.current.scale.lerp(HuisScale, delta * ANIM_SPEED);
+
+      // Legs positioning
       const targetLeftPosition = new Vector3(-14.58 * tableWidthScale, 5, -0.07);
       leftLegs.current.position.lerp(targetLeftPosition, delta * ANIM_SPEED);
-  
       const targetRightPosition = new Vector3(14.58 * tableWidthScale, 5, -0.07);
       rightLegs.current.position.lerp(targetRightPosition, delta * ANIM_SPEED);
 
+      // Poly positioning
       const Poly01Position = new Vector3(9.72 + ((tableWidthScale-1)*14.58), 12.11, -15);
       Poly01.current.position.lerp(Poly01Position, delta * ANIM_SPEED);
       const Poly02Position = new Vector3( ((tableWidthScale-1)*-14.58), 12.12, -14.98);
@@ -68,6 +73,7 @@ export function Table(props) {
       const Poly03Position = new Vector3(-9.72 + ((tableWidthScale-1)*-14.58), 12.11, -15);
       Poly03.current.position.lerp(Poly03Position, delta * ANIM_SPEED);
 
+      // Ligger positioning
       const EindLiggerRechtsPosition = new Vector3(14.58 + ((tableWidthScale-1)*14.58), 11.87, -14.9);
       EindLiggerRechts.current.position.lerp(EindLiggerRechtsPosition, delta * ANIM_SPEED);
       const EindLiggerLinksPosition = new Vector3(-14.58 + ((tableWidthScale-1)*-14.58), 12, -14.78);
@@ -77,6 +83,10 @@ export function Table(props) {
       const Ligger02Position = new Vector3(-4.82 + ((tableWidthScale-1)*-14.58), 12, -15);
       Ligger02.current.position.lerp(Ligger02Position, delta * ANIM_SPEED);
 
+      // Schuifpui schuiven
+      // rightWindowPanel
+      const rightWindowPanelPosition = new Vector3(8.7+ ((tableWidthScale-1)*-14.58), 4.91, -0.38);
+      rightWindowPanel.current.position.lerp(rightWindowPanelPosition, delta * ANIM_SPEED);
     });
 
     
@@ -101,6 +111,7 @@ export function Table(props) {
   position={[-0.4, 14.26, -29.79]}
   rotation={[Math.PI / 2, 0, 0]}
   scale={[15, 1, 0.18]}
+  ref={Huis}
 />
 <mesh
   castShadow
@@ -348,7 +359,7 @@ export function Table(props) {
       />
   </>
 )}
-<group position={[8.7, 4.91, -0.38]} scale={[11.33, 4.48, 4.41]}>
+<group position={[8.7, 4.91, -0.38]} scale={[11.33, 4.48, 4.41]} ref={rightWindowPanel}>
   <mesh
     castShadow
     receiveShadow
