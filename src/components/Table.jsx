@@ -13,7 +13,7 @@ import { Vector3 } from "three";
 const ANIM_SPEED = 12;
 
 export function Table(props) {
-  const { nodes, materials } = useGLTF("./models/BasicVeranda3.glb");
+  const { nodes, materials } = useGLTF("./models/BasicVeranda4.glb");
 
     const { legs, legsColor, tableWidth } = useConfigurator();
     
@@ -29,16 +29,18 @@ export function Table(props) {
     const Ligger02 = useRef();
     
     var tableWidthBase = 3
-    var Poly04_posX = -2.83 + ((tableWidth/tableWidthBase-1)*-14.72) + 9.72
-    var Poly05_posX = -2.83 + ((tableWidth/tableWidthBase-1)*-14.72) + 9.72 * 2
-    var Poly06_posX = -2.83 + ((tableWidth/tableWidthBase-1)*-14.72) + 9.72 * 3
-    var Poly07_posX = -2.83 + ((tableWidth/tableWidthBase-1)*-14.72) + 9.72 * 4
-    var Poly08_posX = -2.83 + ((tableWidth/tableWidthBase-1)*-14.72) + 9.72 * 5
-    var Ligger04_posX = -2.83 + ((tableWidth/tableWidthBase-1)*-14.72) + 9.72
-    var Ligger05_posX = -2.83 + ((tableWidth/tableWidthBase-1)*-14.72) + 9.72 * 2
-    var Ligger06_posX = -2.83 + ((tableWidth/tableWidthBase-1)*-14.72) + 9.72 * 3
-    var Ligger07_posX = -2.83 + ((tableWidth/tableWidthBase-1)*-14.72) + 9.72 * 4
-    var Ligger08_posX = -2.83 + ((tableWidth/tableWidthBase-1)*-14.72) + 9.72 * 5
+    // var DimensionWidthPolyPlate = 9.72
+    // var legsLeftRightPositionX = 14.58
+    var Poly04_posX = ((tableWidth/tableWidthBase-1)*-14.58) + 9.72
+    var Poly05_posX = ((tableWidth/tableWidthBase-1)*-14.58) + 9.72 * 2
+    var Poly06_posX = ((tableWidth/tableWidthBase-1)*-14.58) + 9.72 * 3
+    var Poly07_posX = ((tableWidth/tableWidthBase-1)*-14.58) + 9.72 * 4
+    var Poly08_posX = ((tableWidth/tableWidthBase-1)*-14.58) + 9.72 * 5
+    var Ligger04_posX = 4.86 + ((tableWidth/tableWidthBase-1)*14.58) - 9.72
+    var Ligger05_posX = 4.86 + ((tableWidth/tableWidthBase-1)*14.58) - 9.72 * 2
+    var Ligger06_posX = 4.86 + ((tableWidth/tableWidthBase-1)*14.58) - 9.72 * 3
+    var Ligger07_posX = 4.86 + ((tableWidth/tableWidthBase-1)*14.58) - 9.72 * 4
+    var Ligger08_posX = 4.86 + ((tableWidth/tableWidthBase-1)*14.58) - 9.72 * 5
 
     useEffect(() => {
       materials.Metal.color = new Three.Color(legsColor);
@@ -48,31 +50,31 @@ export function Table(props) {
       const tableWidthScale = tableWidth / tableWidthBase;
 
 
-      const targetScale = new Vector3(0.15, 0.08, 15 * tableWidthScale);
+      const targetScale = new Vector3(0.15, 0.08, 14.76 * tableWidthScale);
       
   
       GootProfiel.current.scale.lerp(targetScale, delta * ANIM_SPEED);
   
-      const targetLeftPosition = new Vector3(-14.72 * tableWidthScale, 5, -0.07);
+      const targetLeftPosition = new Vector3(-14.58 * tableWidthScale, 5, -0.07);
       leftLegs.current.position.lerp(targetLeftPosition, delta * ANIM_SPEED);
   
-      const targetRightPosition = new Vector3(14.74 * tableWidthScale, 5, -0.07);
+      const targetRightPosition = new Vector3(14.58 * tableWidthScale, 5, -0.07);
       rightLegs.current.position.lerp(targetRightPosition, delta * ANIM_SPEED);
 
-      const Poly01Position = new Vector3(7.07 + ((tableWidthScale-1)*14.74), 12.06, -15);
+      const Poly01Position = new Vector3(9.72 + ((tableWidthScale-1)*14.58), 12.11, -15);
       Poly01.current.position.lerp(Poly01Position, delta * ANIM_SPEED);
-      const Poly02Position = new Vector3(-2.83 + ((tableWidthScale-1)*-14.72), 12.06, -15);
+      const Poly02Position = new Vector3( ((tableWidthScale-1)*-14.58), 12.12, -14.98);
       Poly02.current.position.lerp(Poly02Position, delta * ANIM_SPEED);
-      const Poly03Position = new Vector3(-12.65 + ((tableWidthScale-1)*-14.72), 12.06, -15);
+      const Poly03Position = new Vector3(-9.72 + ((tableWidthScale-1)*-14.58), 12.11, -15);
       Poly03.current.position.lerp(Poly03Position, delta * ANIM_SPEED);
 
-      const EindLiggerRechtsPosition = new Vector3(14.8 + ((tableWidthScale-1)*14.74), 11.87, -14.9);
+      const EindLiggerRechtsPosition = new Vector3(14.58 + ((tableWidthScale-1)*14.58), 11.87, -14.9);
       EindLiggerRechts.current.position.lerp(EindLiggerRechtsPosition, delta * ANIM_SPEED);
-      const EindLiggerLinksPosition = new Vector3(-14.75 + ((tableWidthScale-1)*-14.72), 12.01, -14.78);
+      const EindLiggerLinksPosition = new Vector3(-14.58 + ((tableWidthScale-1)*-14.58), 12, -14.78);
       EindLiggerLinks.current.position.lerp(EindLiggerLinksPosition, delta * ANIM_SPEED);
-      const Ligger01Position = new Vector3(5.15 + ((tableWidthScale-1)*14.74), 12.06, -15);
+      const Ligger01Position = new Vector3(4.86 + ((tableWidthScale-1)*14.58), 12, -15);
       Ligger01.current.position.lerp(Ligger01Position, delta * ANIM_SPEED);
-      const Ligger02Position = new Vector3(-4.69 + ((tableWidthScale-1)*-14.72), 12.06, -15);
+      const Ligger02Position = new Vector3(-4.82 + ((tableWidthScale-1)*-14.58), 12, -15);
       Ligger02.current.position.lerp(Ligger02Position, delta * ANIM_SPEED);
 
     });
@@ -80,274 +82,324 @@ export function Table(props) {
     
 
   return (
-    <group {...props} dispose={null}>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.GootProfiel.geometry}
-        material={nodes.GootProfiel.material}
-        position={[0, 10, 0]}
-        rotation={[0, -Math.PI / 2, 0]}
-        scale={[0.15, 0.08, 15]}
-        ref={GootProfiel}
+<group {...props} dispose={null}>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.GootProfiel.geometry}
+  material={nodes.GootProfiel.material}
+  position={[0, 10, 0]}
+  rotation={[0, -Math.PI / 2, 0]}
+  scale={[0.15, 0.08, 14.76]}
+  ref={GootProfiel}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.Huis.geometry}
+  material={nodes.Huis.material}
+  position={[-0.4, 14.26, -29.79]}
+  rotation={[Math.PI / 2, 0, 0]}
+  scale={[15, 1, 0.18]}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.PolyKanaalplaat01.geometry}
+  material={materials["PolyCarbonatSheets.001"]}
+  position={[9.72, 12.11, -15]}
+  rotation={[0.14, 0, 0]}
+  scale={[0.6, 0.04, 15]}
+  ref={Poly01}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.PolyKanaalplaat02.geometry}
+  material={materials["PolyCarbonatSheets.001"]}
+  position={[0, 12.12, -14.98]}
+  rotation={[0.14, 0, 0]}
+  scale={[0.6, 0.04, 15]}
+  ref={Poly02}
+/>
+{tableWidth > 3 && (
+  <>
+    <mesh
+      castShadow
+      receiveShadow
+      geometry={nodes.PolyKanaalplaat02.geometry}
+      material={materials["PolyCarbonatSheets.001"]}
+      position={[Poly04_posX, 12.12, -14.98]}
+      rotation={[0.14, 0, 0]}
+      scale={[0.6, 0.04, 15]}
+    />
+    <mesh
+      castShadow
+      receiveShadow
+      geometry={nodes.Ligger01.geometry}
+      material={nodes.Ligger01.material}
+      position={[Ligger04_posX, 12, -15]}
+      rotation={[0.14, 0, 0]}
+      scale={[0.18, 1.58, 14.97]}
+    />
+  </>
+)}
+{tableWidth > 4 && (
+  <>
+    <mesh
+      castShadow
+      receiveShadow
+      geometry={nodes.PolyKanaalplaat02.geometry}
+      material={materials["PolyCarbonatSheets.001"]}
+      position={[Poly05_posX, 12.12, -14.98]}
+      rotation={[0.14, 0, 0]}
+      scale={[0.6, 0.04, 15]}
+    />
+    <mesh
+      castShadow
+      receiveShadow
+      geometry={nodes.Ligger01.geometry}
+      material={nodes.Ligger01.material}
+      position={[Ligger05_posX, 12, -15]}
+      rotation={[0.14, 0, 0]}
+      scale={[0.18, 1.58, 14.97]}
+    />
+  </>
+)}
+{tableWidth > 5 && (
+  <>
+    <mesh
+      castShadow
+      receiveShadow
+      geometry={nodes.PolyKanaalplaat02.geometry}
+      material={materials["PolyCarbonatSheets.001"]}
+      position={[Poly06_posX, 12.12, -14.98]}
+      rotation={[0.14, 0, 0]}
+      scale={[0.6, 0.04, 15]}
+    />
+    <mesh
+      castShadow
+      receiveShadow
+      geometry={nodes.Ligger01.geometry}
+      material={nodes.Ligger01.material}
+      position={[Ligger06_posX, 12, -15]}
+      rotation={[0.14, 0, 0]}
+      scale={[0.18, 1.58, 14.97]}
+    />
+  </>
+)}
+{tableWidth > 6 && (
+  <>
+    <mesh
+      castShadow
+      receiveShadow
+      geometry={nodes.PolyKanaalplaat02.geometry}
+      material={materials["PolyCarbonatSheets.001"]}
+      position={[Poly07_posX, 12.12, -14.98]}
+      rotation={[0.14, 0, 0]}
+      scale={[0.6, 0.04, 15]}
+    />
+    <mesh
+      castShadow
+      receiveShadow
+      geometry={nodes.Ligger01.geometry}
+      material={nodes.Ligger01.material}
+      position={[Ligger07_posX, 12, -15]}
+      rotation={[0.14, 0, 0]}
+      scale={[0.18, 1.58, 14.97]}
+    />
+  </>
+)}
+{tableWidth > 7 && (
+  <>
+    <mesh
+      castShadow
+      receiveShadow
+      geometry={nodes.PolyKanaalplaat02.geometry}
+      material={materials["PolyCarbonatSheets.001"]}
+      position={[Poly08_posX, 12.12, -14.98]}
+      rotation={[0.14, 0, 0]}
+      scale={[0.6, 0.04, 15]}
+    />
+    <mesh
+      castShadow
+      receiveShadow
+      geometry={nodes.Ligger01.geometry}
+      material={nodes.Ligger01.material}
+      position={[Ligger08_posX, 12, -15]}
+      rotation={[0.14, 0, 0]}
+      scale={[0.18, 1.58, 14.97]}
+    />
+  </>
+)}
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.PolyKanaalplaat03.geometry}
+  material={materials["PolyCarbonatSheets.001"]}
+  position={[-9.72, 12.11, -15]}
+  rotation={[0.14, 0, 0]}
+  scale={[0.6, 0.04, 15]}
+  ref={Poly03}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.Ligger01.geometry}
+  material={nodes.Ligger01.material}
+  position={[4.86, 12, -15]}
+  rotation={[0.14, 0, 0]}
+  scale={[0.18, 1.58, 14.97]}
+  ref={Ligger01}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.EindLiggerRechts.geometry}
+  material={nodes.EindLiggerRechts.material}
+  position={[14.58, 11.87, -14.9]}
+  rotation={[0.14, 0, 0]}
+  scale={[0.18, 1.58, 14.97]}
+  ref={EindLiggerRechts}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.Ligger02.geometry}
+  material={nodes.Ligger02.material}
+  position={[-4.82, 12, -15]}
+  rotation={[0.14, 0, 0]}
+  scale={[0.18, 1.58, 14.97]}
+  ref={Ligger02}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.EindLiggerLinks.geometry}
+  material={nodes.EindLiggerLinks.material}
+  position={[-14.58, 12, -14.78]}
+  rotation={[0.14, 0, 0]}
+  scale={[0.18, 1.58, 14.97]}
+  ref={EindLiggerLinks}
+/>
+{legs === 0 && (
+  <>
+    <mesh
+      castShadow
+      receiveShadow
+      geometry={nodes.Legs01Left.geometry}
+      material={materials.Metal}
+      position={[-14.58, 5, -0.07]}
+      scale={[0.25, 5, 0.3]}
+      ref={leftLegs}
+    />
+    <mesh
+      castShadow
+      receiveShadow
+      geometry={nodes.Legs01Right.geometry}
+      material={materials.Metal}
+      position={[14.58, 5, -0.07]}
+      scale={[0.25, 5, 0.3]}
+      ref={rightLegs}
       />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Huis.geometry}
-        material={nodes.Huis.material}
-        position={[0, 14.29, -29.79]}
-        rotation={[Math.PI / 2, 0, 0]}
-        scale={[15, 1, 0.18]}
+  </>
+)}
+{legs === 1 && (
+  <>
+    <mesh
+      castShadow
+      receiveShadow
+      geometry={nodes.Legs01Left.geometry}
+      material={materials.Metal}
+      position={[-14.58, 5, -0.07]}
+      scale={[0.25, 5, 0.3]}
+      ref={leftLegs}
+    />
+    <mesh
+      castShadow
+      receiveShadow
+      geometry={nodes.Legs01Right.geometry}
+      material={materials.Metal}
+      position={[14.58, 5, -0.07]}
+      scale={[0.25, 5, 0.3]}
+      ref={rightLegs}
       />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.PolyKanaalplaat01.geometry}
-        material={materials["PolyCarbonatSheets.001"]}
-        position={[7.07, 12.06, -15]}
-        rotation={[0.14, 0, 0]}
-        scale={[0.6, 0.04, 15]}
-        ref={Poly01}
+  </>
+)}
+{legs === 2 && (
+  <>
+    <mesh
+      castShadow
+      receiveShadow
+      geometry={nodes.Legs01Left.geometry}
+      material={materials.Metal}
+      position={[-14.58, 5, -0.07]}
+      scale={[0.25, 5, 0.3]}
+      ref={leftLegs}
+    />
+    <mesh
+      castShadow
+      receiveShadow
+      geometry={nodes.Legs01Right.geometry}
+      material={materials.Metal}
+      position={[14.58, 5, -0.07]}
+      scale={[0.25, 5, 0.3]}
+      ref={rightLegs}
       />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.PolyKanaalplaat02.geometry}
-        material={materials["PolyCarbonatSheets.001"]}
-        position={[-2.83, 12.06, -15]}
-        rotation={[0.14, 0, 0]}
-        scale={[0.6, 0.04, 15]}
-        ref={Poly02}
-      />
-      {tableWidth > 3 && (
-        <>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.PolyKanaalplaat02.geometry}
-            material={materials["PolyCarbonatSheets.001"]}
-            position={[Poly04_posX, 12.06, -15]}
-            rotation={[0.14, 0, 0]}
-            scale={[0.6, 0.04, 15]}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Ligger01.geometry}
-            material={nodes.Ligger01.material}
-            position={[Ligger04_posX, 12.06, -15]}
-            rotation={[0.14, 0, 0]}
-            scale={[0.18, 1.58, 14.97]}
-          />
-        </>
-    )}
-      {tableWidth > 4 && (
-        <>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.PolyKanaalplaat02.geometry}
-            material={materials["PolyCarbonatSheets.001"]}
-            position={[Poly05_posX, 12.06, -15]}
-            rotation={[0.14, 0, 0]}
-            scale={[0.6, 0.04, 15]}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Ligger01.geometry}
-            material={nodes.Ligger01.material}
-            position={[Ligger05_posX, 12.06, -15]}
-            rotation={[0.14, 0, 0]}
-            scale={[0.18, 1.58, 14.97]}
-          />
-        </>
-    )}
-      {tableWidth > 5 && (
-        <>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.PolyKanaalplaat02.geometry}
-            material={materials["PolyCarbonatSheets.001"]}
-            position={[Poly06_posX, 12.06, -15]}
-            rotation={[0.14, 0, 0]}
-            scale={[0.6, 0.04, 15]}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Ligger01.geometry}
-            material={nodes.Ligger01.material}
-            position={[Ligger06_posX, 12.06, -15]}
-            rotation={[0.14, 0, 0]}
-            scale={[0.18, 1.58, 14.97]}
-          />
-        </>
-    )}
-      {tableWidth > 6 && (
-        <>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.PolyKanaalplaat02.geometry}
-            material={materials["PolyCarbonatSheets.001"]}
-            position={[Poly07_posX, 12.06, -15]}
-            rotation={[0.14, 0, 0]}
-            scale={[0.6, 0.04, 15]}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Ligger01.geometry}
-            material={nodes.Ligger01.material}
-            position={[Ligger07_posX, 12.06, -15]}
-            rotation={[0.14, 0, 0]}
-            scale={[0.18, 1.58, 14.97]}
-          />
-        </>
-    )}
-      {tableWidth > 7 && (
-        <>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.PolyKanaalplaat02.geometry}
-            material={materials["PolyCarbonatSheets.001"]}
-            position={[Poly08_posX, 12.06, -15]}
-            rotation={[0.14, 0, 0]}
-            scale={[0.6, 0.04, 15]}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Ligger01.geometry}
-            material={nodes.Ligger01.material}
-            position={[Ligger08_posX, 12.06, -15]}
-            rotation={[0.14, 0, 0]}
-            scale={[0.18, 1.58, 14.97]}
-          />
-        </>
-    )}
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.PolyKanaalplaat03.geometry}
-        material={materials["PolyCarbonatSheets.001"]}
-        position={[-12.65, 12.06, -15]}
-        rotation={[0.14, 0, 0]}
-        scale={[0.6, 0.04, 15]}
-        ref={Poly03}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Ligger01.geometry}
-        material={nodes.Ligger01.material}
-        position={[5.15, 12.06, -15]}
-        rotation={[0.14, 0, 0]}
-        scale={[0.18, 1.58, 14.97]}
-        ref={Ligger01}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.EindLiggerRechts.geometry}
-        material={nodes.EindLiggerRechts.material}
-        position={[14.8, 11.87, -14.9]}
-        rotation={[0.14, 0, 0]}
-        scale={[0.18, 1.58, 14.97]}
-        ref={EindLiggerRechts}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Ligger02.geometry}
-        material={nodes.Ligger02.material}
-        position={[-4.69, 12.06, -15]}
-        rotation={[0.14, 0, 0]}
-        scale={[0.18, 1.58, 14.97]}
-        ref={Ligger02}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.EindLiggerLinks.geometry}
-        material={nodes.EindLiggerLinks.material}
-        position={[-14.75, 12.01, -14.78]}
-        rotation={[0.14, 0, 0]}
-        scale={[0.18, 1.58, 14.97]}
-        ref={EindLiggerLinks}
-      />
-      {legs === 0 && (
-        <>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Legs01Left.geometry}
-            material={materials.Metal}
-            position={[-14.72, 5, -0.07]}
-            scale={[0.25, 5, 0.3]}
-            ref={leftLegs}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Legs01Right.geometry}
-            material={materials.Metal}
-            position={[14.74, 5, -0.07]}
-            scale={[0.25, 5, 0.3]}
-            ref={rightLegs}
-            />
-        </>
-    )}
-      {legs === 1 && (
-        <>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Legs01Left.geometry}
-            material={materials.Metal}
-            position={[-14.72, 5, -0.07]}
-            scale={[0.25, 5, 0.3]}
-            ref={leftLegs}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Legs01Right.geometry}
-            material={materials.Metal}
-            position={[14.74, 5, -0.07]}
-            scale={[0.25, 5, 0.3]}
-            ref={rightLegs}
-            />
-        </>
-    )}
-      {legs === 2 && (
-        <>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Legs01Left.geometry}
-            material={materials.Metal}
-            position={[-14.72, 5, -0.07]}
-            scale={[0.25, 5, 0.3]}
-            ref={leftLegs}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Legs01Right.geometry}
-            material={materials.Metal}
-            position={[14.74, 5, -0.07]}
-            scale={[0.25, 5, 0.3]}
-            ref={rightLegs}
-            />
-        </>
-    )}
-    </group>
+  </>
+)}
+<group position={[8.7, 4.91, -0.38]} scale={[11.33, 4.48, 4.41]}>
+  <mesh
+    castShadow
+    receiveShadow
+    geometry={nodes.Window_Panel013.geometry}
+    material={nodes.Window_Panel013.material}
+  />
+  <mesh
+    castShadow
+    receiveShadow
+    geometry={nodes.Window_Panel013_1.geometry}
+    material={materials.MaterialGlass}
+  />
+</group>
+<group position={[0.02, 4.91, -0.12]} scale={[11.33, 4.48, 4.41]}>
+  <mesh
+    castShadow
+    receiveShadow
+    geometry={nodes.Window_Panel012.geometry}
+    material={nodes.Window_Panel012.material}
+  />
+  <mesh
+    castShadow
+    receiveShadow
+    geometry={nodes.Window_Panel012_1.geometry}
+    material={materials.MaterialGlass}
+  />
+</group>
+<group position={[-8.7, 4.91, 0.17]} scale={[11.33, 4.48, 4.41]}>
+  <mesh
+    castShadow
+    receiveShadow
+    geometry={nodes.Window_Panel011.geometry}
+    material={nodes.Window_Panel011.material}
+  />
+  <mesh
+    castShadow
+    receiveShadow
+    geometry={nodes.Window_Panel011_1.geometry}
+    material={materials.MaterialGlass}
+  />
+</group>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.WindowFrame.geometry}
+  material={nodes.WindowFrame.material}
+  position={[0, 0.27, 0.15]}
+  scale={[11.33, 4.47, 4.41]}
+/>
+</group>
   );
 }
 
-useGLTF.preload("./models/BasicVeranda3.glb");
+useGLTF.preload("./models/BasicVeranda4.glb");
