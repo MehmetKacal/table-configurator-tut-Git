@@ -13,7 +13,7 @@ import { Vector3 } from "three";
 const ANIM_SPEED = 12;
 
 export function Table(props) {
-  const { nodes, materials } = useGLTF("./models/BasicVeranda4.glb");
+  const { nodes, materials } = useGLTF("./models/BasicVeranda5.glb");
 
     const { legs, legsColor, tableWidth } = useConfigurator();
     
@@ -28,7 +28,10 @@ export function Table(props) {
     const EindLiggerLinks = useRef();
     const Ligger01 = useRef();
     const Ligger02 = useRef();
+    const windowFrame = useRef();
     const rightWindowPanel = useRef();
+    const leftWindowPanel = useRef();
+    const midWindowPanel = useRef();
     
     var tableWidthBase = 3
     // var DimensionWidthPolyPlate = 9.72
@@ -43,6 +46,9 @@ export function Table(props) {
     var Ligger06_posX = 4.86 + ((tableWidth/tableWidthBase-1)*14.58) - 9.72 * 3
     var Ligger07_posX = 4.86 + ((tableWidth/tableWidthBase-1)*14.58) - 9.72 * 4
     var Ligger08_posX = 4.86 + ((tableWidth/tableWidthBase-1)*14.58) - 9.72 * 5
+    var Window04_posX = 8.7 + ((tableWidth/tableWidthBase-1)*-14.58) + 9.40647
+    var Window05_posX = 8.7 + ((tableWidth/tableWidthBase-1)*-14.58) + 9.40647 * 2
+    var Window06_posX = 8.7 + ((tableWidth/tableWidthBase-1)*-14.58) + 9.40647 * 3
 
     useEffect(() => {
       materials.Metal.color = new Three.Color(legsColor);
@@ -83,10 +89,17 @@ export function Table(props) {
       const Ligger02Position = new Vector3(-4.82 + ((tableWidthScale-1)*-14.58), 12, -15);
       Ligger02.current.position.lerp(Ligger02Position, delta * ANIM_SPEED);
 
+      // Schuifpui frame Scaling
+      const windowFramePosition = new Vector3(11.33 * tableWidthScale, 4.47, 4.41);
+      windowFrame.current.scale.lerp(windowFramePosition, delta * ANIM_SPEED);
       // Schuifpui schuiven
       // rightWindowPanel
       const rightWindowPanelPosition = new Vector3(8.7+ ((tableWidthScale-1)*-14.58), 4.91, -0.38);
       rightWindowPanel.current.position.lerp(rightWindowPanelPosition, delta * ANIM_SPEED);
+      const leftWindowPanelPosition = new Vector3(-8.7+ ((tableWidthScale-1)*-14.58), 4.91, 0.17);
+      leftWindowPanel.current.position.lerp(leftWindowPanelPosition, delta * ANIM_SPEED);
+      const midWindowPanelPosition = new Vector3(0.02+ ((tableWidthScale-1)*-14.58), 4.91, -0.12);
+      midWindowPanel.current.position.lerp(midWindowPanelPosition, delta * ANIM_SPEED);
     });
 
     
@@ -153,6 +166,20 @@ export function Table(props) {
       rotation={[0.14, 0, 0]}
       scale={[0.18, 1.58, 14.97]}
     />
+    <group position={[Window04_posX, 4.91, -0.38]} scale={[11.33, 4.48, 4.41]}>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Window_Panel013.geometry}
+        material={nodes.Window_Panel013.material}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Window_Panel013_1.geometry}
+        material={materials.MaterialGlass}
+      />
+    </group>
   </>
 )}
 {tableWidth > 4 && (
@@ -175,6 +202,20 @@ export function Table(props) {
       rotation={[0.14, 0, 0]}
       scale={[0.18, 1.58, 14.97]}
     />
+    <group position={[Window05_posX, 4.91, -0.38]} scale={[11.33, 4.48, 4.41]}>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Window_Panel013.geometry}
+        material={nodes.Window_Panel013.material}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Window_Panel013_1.geometry}
+        material={materials.MaterialGlass}
+      />
+    </group>
   </>
 )}
 {tableWidth > 5 && (
@@ -197,6 +238,20 @@ export function Table(props) {
       rotation={[0.14, 0, 0]}
       scale={[0.18, 1.58, 14.97]}
     />
+    <group position={[Window06_posX, 4.91, -0.38]} scale={[11.33, 4.48, 4.41]}>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Window_Panel013.geometry}
+        material={nodes.Window_Panel013.material}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Window_Panel013_1.geometry}
+        material={materials.MaterialGlass}
+      />
+    </group>
   </>
 )}
 {tableWidth > 6 && (
@@ -373,7 +428,7 @@ export function Table(props) {
     material={materials.MaterialGlass}
   />
 </group>
-<group position={[0.02, 4.91, -0.12]} scale={[11.33, 4.48, 4.41]}>
+<group position={[0.02, 4.91, -0.12]} scale={[11.33, 4.48, 4.41]} ref={midWindowPanel}>
   <mesh
     castShadow
     receiveShadow
@@ -387,7 +442,7 @@ export function Table(props) {
     material={materials.MaterialGlass}
   />
 </group>
-<group position={[-8.7, 4.91, 0.17]} scale={[11.33, 4.48, 4.41]}>
+<group position={[-8.7, 4.91, 0.17]} scale={[11.33, 4.48, 4.41]} ref={leftWindowPanel}>
   <mesh
     castShadow
     receiveShadow
@@ -408,9 +463,10 @@ export function Table(props) {
   material={nodes.WindowFrame.material}
   position={[0, 0.27, 0.15]}
   scale={[11.33, 4.47, 4.41]}
+  ref={windowFrame}
 />
 </group>
   );
 }
 
-useGLTF.preload("./models/BasicVeranda4.glb");
+useGLTF.preload("./models/BasicVeranda5.glb");
