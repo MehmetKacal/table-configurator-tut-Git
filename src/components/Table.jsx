@@ -13,7 +13,7 @@ import { Vector3 } from "three";
 const ANIM_SPEED = 12;
 
 export function Table(props) {
-  const { nodes, materials } = useGLTF("./models/BasicVeranda5.glb");
+  const { nodes, materials } = useGLTF("./models/BasicVeranda6.glb");
 
     const { legs, legsColor, tableWidth } = useConfigurator();
     
@@ -469,4 +469,4 @@ export function Table(props) {
   );
 }
 
-useGLTF.preload("./models/BasicVeranda5.glb");
+useGLTF.preload("./models/BasicVeranda6.glb");
