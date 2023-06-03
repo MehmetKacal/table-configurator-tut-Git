@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { useConfigurator } from "../contexts/Configurator";
 export const Interface = () => {
-  const { tableWidth, setTableWidth, legs, setLegs, legsColor, setLegsColor } =
+  const { verandaWidth, setVerandaWidth, legs, setLegs, aluminiumColor, setAluminiumColor } =
     useConfigurator();
 
   return (
@@ -24,25 +24,25 @@ export const Interface = () => {
       p={3}
     >
       <Stack spacing={3}>
-        <Typography variant="caption">Table Configurator</Typography>
+        <Typography variant="caption">Configureer uw Veranda</Typography>
         <Box className="glass" p={3}>
           <FormControl>
-            <FormLabel>Table width</FormLabel>
+            <FormLabel>Breedte (in Meter)</FormLabel>
             <Slider
               sx={{
                 width: "200px",
               }}
               min={3}
               max={8}
-              value={tableWidth}
-              onChange={(e) => setTableWidth(e.target.value)}
+              value={verandaWidth}
+              onChange={(e) => setVerandaWidth(e.target.value)}
               valueLabelDisplay="auto"
             />
           </FormControl>
         </Box>
         <Box className="glass" p={3}>
           <FormControl>
-            <FormLabel>Legs Layout</FormLabel>
+            <FormLabel>Stijl</FormLabel>
             <RadioGroup
               value={legs}
               onChange={(e) => setLegs(parseInt(e.target.value))}
@@ -50,29 +50,29 @@ export const Interface = () => {
               <FormControlLabel
                 value={0}
                 control={<Radio />}
-                label="Standard"
+                label="Klassiek"
               />
-              <FormControlLabel value={1} control={<Radio />} label="Solid" />
+              <FormControlLabel value={1} control={<Radio />} label="Modern" />
               <FormControlLabel value={2} control={<Radio />} label="Design" />
             </RadioGroup>
           </FormControl>
         </Box>
         <Box className="glass" p={3}>
           <FormControl>
-            <FormLabel>Legs Color</FormLabel>
+            <FormLabel>Kleur materiaal</FormLabel>
             <RadioGroup
-              value={legsColor}
-              onChange={(e) => setLegsColor(e.target.value)}
+              value={aluminiumColor}
+              onChange={(e) => setAluminiumColor(e.target.value)}
             >
               <FormControlLabel
-                value={"#777777"}
+                value={"#f1f0ea"}
                 control={<Radio />}
-                label="Black"
+                label="Wit (RAL 9016)"
               />
               <FormControlLabel
-                value={"#ECECEC"}
+                value={"#353C40"}
                 control={<Radio />}
-                label="Chrome"
+                label="Antraciet (RAL 7016)"
               />
               <FormControlLabel
                 value={"#C9BD71"}

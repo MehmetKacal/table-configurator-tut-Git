@@ -1,6 +1,6 @@
 import { OrbitControls, Stage } from "@react-three/drei";
 import { useConfigurator } from "../contexts/Configurator";
-import { Table } from "./Table";
+import { Veranda } from "./Veranda";
 
 export const Experience = () => {
   const { legs } = useConfigurator(); // Force rerender the stage & shadows
@@ -17,7 +17,7 @@ export const Experience = () => {
         }}
         adjustCamera={2}
       >
-        <Table />
+        <Veranda />
       </Stage>
       <OrbitControls
         makeDefault
