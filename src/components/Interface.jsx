@@ -70,6 +70,11 @@ export const Interface = () => {
                 label="Wit (RAL 9016)"
               />
               <FormControlLabel
+                value={"#e9e0d2"}
+                control={<Radio />}
+                label="Crèmewit (RAL 9001)"
+              />
+              <FormControlLabel
                 value={"#353C40"}
                 control={<Radio />}
                 label="Antraciet (RAL 7016)"
@@ -78,11 +83,6 @@ export const Interface = () => {
                 value={"#C9BD71"}
                 control={<Radio />}
                 label="Gold"
-              />
-              <FormControlLabel
-                value={"#C9A3B9"}
-                control={<Radio />}
-                label="Pink Gold"
               />
             </RadioGroup>
           </FormControl>
