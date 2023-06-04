@@ -33,7 +33,9 @@ export function Veranda(props) {
     const leftWindowPanel = useRef();
     const midWindowPanel = useRef();
     
+    const scale = 10;
     var verandaWidthBase = 3
+    var verandaDepthBase = 2.5
     // var DimensionWidthPolyPlate = 9.72
     // var legsLeftRightPositionX = 14.58
     var Poly04_posX = ((verandaWidth/verandaWidthBase-1)*-14.58) + 9.72
@@ -49,6 +51,10 @@ export function Veranda(props) {
     var Window04_posX = 8.7 + ((verandaWidth/verandaWidthBase-1)*-14.58) + 9.40647
     var Window05_posX = 8.7 + ((verandaWidth/verandaWidthBase-1)*-14.58) + 9.40647 * 2
     var Window06_posX = 8.7 + ((verandaWidth/verandaWidthBase-1)*-14.58) + 9.40647 * 3
+    var PolyEx_scaleY = 12.5 * verandaDepth / verandaDepthBase
+    var LiggerEx_scaleY = 12.47 * verandaDepth / verandaDepthBase
+    var PolyEx_posY = -12.83 -(verandaDepth - verandaDepthBase)/2*scale
+    var LiggerEx_posY = -12.97 -(verandaDepth - verandaDepthBase)/2*scale
 
     useEffect(() => {
       materials.Aluminium.color = new Three.Color(aluminiumColor);
@@ -56,6 +62,8 @@ export function Veranda(props) {
   
     useFrame((_state, delta) => {
       const verandaWidthScale = verandaWidth / verandaWidthBase;
+      const verandaDepthScale = verandaDepth / verandaDepthBase;
+      const verandaDepthDelta = verandaDepth - verandaDepthBase;
 
       // GootProfiel Scaling
       const targetScale = new Vector3(0.73, 0.7, 14.76 * verandaWidthScale);
@@ -65,28 +73,48 @@ export function Veranda(props) {
       const HuisScale = new Vector3(17.5 * verandaWidthScale, 15, 15);
       Huis.current.scale.lerp(HuisScale, delta * ANIM_SPEED);
 
+      // House positioning
+      const HuisPositioning = new Vector3(0, 15, -40.3 - verandaDepthDelta*scale);
+      Huis.current.position.lerp(HuisPositioning, delta * ANIM_SPEED);
+
       // Legs positioning
       const targetLeftPosition = new Vector3(-14.58 * verandaWidthScale, 10, 0);
       leftLegs.current.position.lerp(targetLeftPosition, delta * ANIM_SPEED);
       const targetRightPosition = new Vector3(14.58 * verandaWidthScale, 10, 0);
       rightLegs.current.position.lerp(targetRightPosition, delta * ANIM_SPEED);
 
+      // Poly Scaling
+      const Poly01Scale = new Vector3(0.6, 0.04, 12.5 * verandaDepthScale);
+      Poly01.current.scale.lerp(Poly01Scale, delta * ANIM_SPEED);
+      const Poly02Scale = new Vector3(0.6, 0.04, 12.5 * verandaDepthScale);
+      Poly02.current.scale.lerp(Poly02Scale, delta * ANIM_SPEED);
+      const Poly03Scale = new Vector3(0.6, 0.04, 12.5 * verandaDepthScale);
+      Poly03.current.scale.lerp(Poly03Scale, delta * ANIM_SPEED);
       // Poly positioning
-      const Poly01Position = new Vector3(9.72 + ((verandaWidthScale-1)*14.58), 22.81, -12.83);
+      const Poly01Position = new Vector3(9.72 + ((verandaWidthScale-1)*14.58), 22.81, -12.83 -verandaDepthDelta/2*scale);
       Poly01.current.position.lerp(Poly01Position, delta * ANIM_SPEED);
-      const Poly02Position = new Vector3( ((verandaWidthScale-1)*-14.58), 22.81, -12.83);
+      const Poly02Position = new Vector3( ((verandaWidthScale-1)*-14.58), 22.81, -12.83 -verandaDepthDelta/2*scale);
       Poly02.current.position.lerp(Poly02Position, delta * ANIM_SPEED);
-      const Poly03Position = new Vector3(-9.72 + ((verandaWidthScale-1)*-14.58), 22.81, -12.83);
+      const Poly03Position = new Vector3(-9.72 + ((verandaWidthScale-1)*-14.58), 22.81, -12.83 -verandaDepthDelta/2*scale);
       Poly03.current.position.lerp(Poly03Position, delta * ANIM_SPEED);
 
+      // Ligger Scaling
+      const EindLiggerRechtsScale = new Vector3(0.18, 8.24, 12.47 * verandaDepthScale);
+      EindLiggerRechts.current.scale.lerp(EindLiggerRechtsScale, delta * ANIM_SPEED);
+      const EindLiggerLinksScale = new Vector3(0.18, 8.24, 12.47 * verandaDepthScale);
+      EindLiggerLinks.current.scale.lerp(EindLiggerLinksScale, delta * ANIM_SPEED);
+      const Ligger01Scale = new Vector3(0.18, 8.24, 12.47 * verandaDepthScale);
+      Ligger01.current.scale.lerp(Ligger01Scale, delta * ANIM_SPEED);
+      const Ligger02Scale = new Vector3(0.18, 8.24, 12.47 * verandaDepthScale);
+      Ligger02.current.scale.lerp(Ligger02Scale, delta * ANIM_SPEED);
       // Ligger positioning
-      const EindLiggerRechtsPosition = new Vector3(14.58 + ((verandaWidthScale-1)*14.58), 21.76, -12.97);
+      const EindLiggerRechtsPosition = new Vector3(14.58 + ((verandaWidthScale-1)*14.58), 21.76, -12.97 -verandaDepthDelta/2*scale);
       EindLiggerRechts.current.position.lerp(EindLiggerRechtsPosition, delta * ANIM_SPEED);
-      const EindLiggerLinksPosition = new Vector3(-14.58 + ((verandaWidthScale-1)*-14.58), 21.76, -12.97);
+      const EindLiggerLinksPosition = new Vector3(-14.58 + ((verandaWidthScale-1)*-14.58), 21.76, -12.97 -verandaDepthDelta/2*scale);
       EindLiggerLinks.current.position.lerp(EindLiggerLinksPosition, delta * ANIM_SPEED);
-      const Ligger01Position = new Vector3(4.86 + ((verandaWidthScale-1)*14.58), 21.76, -12.97);
+      const Ligger01Position = new Vector3(4.86 + ((verandaWidthScale-1)*14.58), 21.76, -12.97 -verandaDepthDelta/2*scale);
       Ligger01.current.position.lerp(Ligger01Position, delta * ANIM_SPEED);
-      const Ligger02Position = new Vector3(-4.82 + ((verandaWidthScale-1)*-14.58), 21.76, -12.97);
+      const Ligger02Position = new Vector3(-4.82 + ((verandaWidthScale-1)*-14.58), 21.76, -12.97 -verandaDepthDelta/2*scale);
       Ligger02.current.position.lerp(Ligger02Position, delta * ANIM_SPEED);
 
       // Schuifpui frame Scaling
@@ -152,18 +180,18 @@ export function Veranda(props) {
       receiveShadow
       geometry={nodes.PolyKanaalplaat02.geometry}
       material={materials["PolyCarbonatSheets.001"]}
-      position={[Poly04_posX, 22.81, -12.83]}
+      position={[Poly04_posX, 22.81, PolyEx_posY]}
       rotation={[0.14, 0, 0]}
-      scale={[0.6, 0.04, 12.5]}
+      scale={[0.6, 0.04, PolyEx_scaleY]}
     />
     <mesh
       castShadow
       receiveShadow
       geometry={nodes.Ligger01.geometry}
       material={nodes.Ligger01.material}
-      position={[Ligger04_posX, 21.76, -12.97]}
+      position={[Ligger04_posX, 21.76, LiggerEx_posY]}
       rotation={[0.14, 0, 0]}
-      scale={[0.18, 8.24, 12.47]}
+      scale={[0.18, 8.24, LiggerEx_scaleY]}
     />
     <group position={[Window04_posX, 10.02, -0.38]} scale={[11.33, 9.29, 4.41]}>
       <mesh
@@ -188,18 +216,18 @@ export function Veranda(props) {
       receiveShadow
       geometry={nodes.PolyKanaalplaat02.geometry}
       material={materials["PolyCarbonatSheets.001"]}
-      position={[Poly05_posX, 22.81, -12.83]}
+      position={[Poly05_posX, 22.81, PolyEx_posY]}
       rotation={[0.14, 0, 0]}
-      scale={[0.6, 0.04, 12.5]}
+      scale={[0.6, 0.04, PolyEx_scaleY]}
     />
     <mesh
       castShadow
       receiveShadow
       geometry={nodes.Ligger01.geometry}
       material={nodes.Ligger01.material}
-      position={[Ligger05_posX, 21.76, -12.97]}
+      position={[Ligger05_posX, 21.76, LiggerEx_posY]}
       rotation={[0.14, 0, 0]}
-      scale={[0.18, 8.24, 12.47]}
+      scale={[0.18, 8.24, LiggerEx_scaleY]}
     />
     <group position={[Window05_posX, 10.02, -0.38]} scale={[11.33, 9.29, 4.41]}>
       <mesh
@@ -224,18 +252,18 @@ export function Veranda(props) {
       receiveShadow
       geometry={nodes.PolyKanaalplaat02.geometry}
       material={materials["PolyCarbonatSheets.001"]}
-      position={[Poly06_posX, 22.81, -12.83]}
+      position={[Poly06_posX, 22.81, PolyEx_posY]}
       rotation={[0.14, 0, 0]}
-      scale={[0.6, 0.04, 12.5]}
+      scale={[0.6, 0.04, PolyEx_scaleY]}
     />
     <mesh
       castShadow
       receiveShadow
       geometry={nodes.Ligger01.geometry}
       material={nodes.Ligger01.material}
-      position={[Ligger06_posX, 21.76, -12.97]}
+      position={[Ligger06_posX, 21.76, LiggerEx_posY]}
       rotation={[0.14, 0, 0]}
-      scale={[0.18, 8.24, 12.47]}
+      scale={[0.18, 8.24, LiggerEx_scaleY]}
     />
     <group position={[Window06_posX, 10.02, -0.38]} scale={[11.33, 9.29, 4.41]}>
       <mesh
@@ -260,18 +288,18 @@ export function Veranda(props) {
       receiveShadow
       geometry={nodes.PolyKanaalplaat02.geometry}
       material={materials["PolyCarbonatSheets.001"]}
-      position={[Poly07_posX, 22.81, -12.83]}
+      position={[Poly07_posX, 22.81, PolyEx_posY]}
       rotation={[0.14, 0, 0]}
-      scale={[0.6, 0.04, 12.5]}
+      scale={[0.6, 0.04, PolyEx_scaleY]}
     />
     <mesh
       castShadow
       receiveShadow
       geometry={nodes.Ligger01.geometry}
       material={nodes.Ligger01.material}
-      position={[Ligger07_posX, 21.76, -12.97]}
+      position={[Ligger07_posX, 21.76, LiggerEx_posY]}
       rotation={[0.14, 0, 0]}
-      scale={[0.18, 8.24, 12.47]}
+      scale={[0.18, 8.24, LiggerEx_scaleY]}
     />
   </>
 )}
@@ -282,18 +310,18 @@ export function Veranda(props) {
       receiveShadow
       geometry={nodes.PolyKanaalplaat02.geometry}
       material={materials["PolyCarbonatSheets.001"]}
-      position={[Poly08_posX, 22.81, -12.83]}
+      position={[Poly08_posX, 22.81, PolyEx_posY]}
       rotation={[0.14, 0, 0]}
-      scale={[0.6, 0.04, 12.5]}
+      scale={[0.6, 0.04, PolyEx_scaleY]}
     />
     <mesh
       castShadow
       receiveShadow
       geometry={nodes.Ligger01.geometry}
       material={nodes.Ligger01.material}
-      position={[Ligger08_posX, 21.76, -12.97]}
+      position={[Ligger08_posX, 21.76, LiggerEx_posY]}
       rotation={[0.14, 0, 0]}
-      scale={[0.18, 8.24, 12.47]}
+      scale={[0.18, 8.24, LiggerEx_scaleY]}
     />
   </>
 )}
