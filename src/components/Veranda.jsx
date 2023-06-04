@@ -15,7 +15,7 @@ const ANIM_SPEED = 12;
 export function Veranda(props) {
   const { nodes, materials } = useGLTF("./models/BasicVeranda8.glb");
 
-    const { legs, aluminiumColor, verandaWidth } = useConfigurator();
+    const { legs, aluminiumColor, verandaWidth, verandaDepth } = useConfigurator();
     
     const GootProfiel = useRef();
     const Huis = useRef();

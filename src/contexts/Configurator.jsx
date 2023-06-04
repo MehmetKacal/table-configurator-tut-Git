@@ -6,6 +6,7 @@ export const ConfiguratorProvider = ({ children }) => {
   const [legs, setLegs] = useState(0);
   const [aluminiumColor, setAluminiumColor] = useState("#f1f0ea");
   const [verandaWidth, setVerandaWidth] = useState(3);
+  const [verandaDepth, setVerandaDepth] = useState(2.5);
   return (
     <ConfiguratorContext.Provider
       value={{
@@ -15,6 +16,8 @@ export const ConfiguratorProvider = ({ children }) => {
         setAluminiumColor,
         verandaWidth,
         setVerandaWidth,
+        verandaDepth,
+        setVerandaDepth,
       }}
     >
       {children}
