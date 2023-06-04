@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { useConfigurator } from "../contexts/Configurator";
 export const Interface = () => {
-  const { verandaWidth, setVerandaWidth, legs, setLegs, aluminiumColor, setAluminiumColor } =
+  const { verandaWidth, setVerandaWidth, verandaDepth, setVerandaDepth, legs, setLegs, aluminiumColor, setAluminiumColor } =
     useConfigurator();
 
   return (
@@ -36,6 +36,22 @@ export const Interface = () => {
               max={8}
               value={verandaWidth}
               onChange={(e) => setVerandaWidth(e.target.value)}
+              valueLabelDisplay="auto"
+            />
+          </FormControl>
+        </Box>
+        <Box className="glass" p={3}>
+          <FormControl>
+            <FormLabel>Diepte (in Meter)</FormLabel>
+            <Slider
+              sx={{
+                width: "200px",
+              }}
+              min={2.5}
+              max={4}
+              step={0.5}
+              value={verandaDepth}
+              onChange={(e) => setVerandaDepth(e.target.value)}
               valueLabelDisplay="auto"
             />
           </FormControl>
@@ -70,6 +86,11 @@ export const Interface = () => {
                 label="Wit (RAL 9016)"
               />
               <FormControlLabel
+                value={"#e9e0d2"}
+                control={<Radio />}
+                label="Crèmewit (RAL 9001)"
+              />
+              <FormControlLabel
                 value={"#353C40"}
                 control={<Radio />}
                 label="Antraciet (RAL 7016)"
@@ -78,11 +99,6 @@ export const Interface = () => {
                 value={"#C9BD71"}
                 control={<Radio />}
                 label="Gold"
-              />
-              <FormControlLabel
-                value={"#C9A3B9"}
-                control={<Radio />}
-                label="Pink Gold"
               />
             </RadioGroup>
           </FormControl>
