@@ -13,11 +13,13 @@ import { Vector3 } from "three";
 const ANIM_SPEED = 12;
 
 export function Veranda(props) {
-  const { nodes, materials } = useGLTF("./models/BasicVeranda8.glb");
+  const { nodes, materials } = useGLTF("./models/BasicVeranda9.glb");
 
     const { legs, aluminiumColor, verandaWidth, verandaDepth } = useConfigurator();
     
     const GootProfiel = useRef();
+    const GootProfielSluiterRechts = useRef();
+    const GootProfielSluiterLinks = useRef();
     const Huis = useRef();
     const leftLegs = useRef();
     const rightLegs = useRef();
@@ -68,9 +70,15 @@ export function Veranda(props) {
       const verandaDepthDelta = verandaDepth - verandaDepthBase;
 
       // GootProfiel Scaling
-      const targetScale = new Vector3(0.73, 0.7, 14.76 * verandaWidthScale);
+      const targetScale = new Vector3(1,1* verandaWidthScale,1);
       GootProfiel.current.scale.lerp(targetScale, delta * ANIM_SPEED);
       
+      // Gootprofiel sluiters positioning
+      const GootProfielSluiterRechtsPositioning = new Vector3(15.11 * verandaWidthScale, 21.02, 0.31);
+      GootProfielSluiterRechts.current.position.lerp(GootProfielSluiterRechtsPositioning, delta * ANIM_SPEED);
+      const GootProfielSluiterLinksPositioning = new Vector3(-14.99 * verandaWidthScale, 21.02, 0.31);
+      GootProfielSluiterLinks.current.position.lerp(GootProfielSluiterLinksPositioning, delta * ANIM_SPEED);
+
       // House scaling
       const HuisScale = new Vector3(17.5 * verandaWidthScale, 15, 15);
       Huis.current.scale.lerp(HuisScale, delta * ANIM_SPEED);
@@ -141,10 +149,28 @@ export function Veranda(props) {
   receiveShadow
   geometry={nodes.GootProfiel.geometry}
   material={nodes.GootProfiel.material}
-  position={[0, 20.7, 0]}
-  rotation={[0, -Math.PI / 2, 0]}
-  scale={[0.73, 0.7, 14.76]}
+  position={[0, 21.01, 0.34]}
+  rotation={[Math.PI / 2, 0, -Math.PI / 2]}
+  scale={[1,1,1]}
   ref={GootProfiel}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.GootProfielSluiterRechts.geometry}
+  material={materials.Aluminium}
+  position={[15.11, 21.02, 0.31]}
+  rotation={[Math.PI / 2, 0, -Math.PI / 2]}
+  ref={GootProfielSluiterRechts}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.GootProfielSluiterLinks.geometry}
+  material={materials.Aluminium}
+  position={[-14.99, 21.02, 0.31]}
+  rotation={[Math.PI / 2, 0, -Math.PI / 2]}
+  ref={GootProfielSluiterLinks}
 />
 <mesh
   castShadow
@@ -498,4 +524,4 @@ export function Veranda(props) {
   );
 }
 
-useGLTF.preload("./models/BasicVeranda8.glb");
+useGLTF.preload("./models/BasicVeranda9.glb");
