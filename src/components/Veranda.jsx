@@ -13,7 +13,7 @@ import { Vector3 } from "three";
 const ANIM_SPEED = 12;
 
 export function Veranda(props) {
-  const { nodes, materials } = useGLTF("./models/BasicVeranda10.glb");
+  const { nodes, materials } = useGLTF("./models/BasicVeranda11.glb");
 
     const { legs, aluminiumColor, verandaWidth, verandaDepth } = useConfigurator();
     
@@ -537,8 +537,56 @@ export function Veranda(props) {
   scale={[11.5, 9.01, 4.41]}
   ref={windowFrame}
 />
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.SpieGrootRechts.geometry}
+  material={materials.Aluminium}
+  position={[14.75, 17.34, -0.54]}
+  rotation={[Math.PI / 2, 0, -Math.PI / 2]}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.SpieGrootLinks.geometry}
+  material={materials.Aluminium}
+  position={[-14.75, 17.34, -0.54]}
+  rotation={[Math.PI / 2, 0, -Math.PI / 2]}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.SpieGrootPolyRechts.geometry}
+  material={materials["PolyCarbonatSheets.Spie"]}
+  position={[14.75, 18.62, -12.97]}
+  scale={[0.1, 1, 12.1]}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.SpieGrootPolyLinks.geometry}
+  material={materials["PolyCarbonatSheets.Spie"]}
+  position={[-14.75, 18.62, -12.97]}
+  scale={[0.1, 1, 12.1]}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.ZijwandRabatRechts.geometry}
+  material={materials.Aluminium}
+  position={[14.75, 8.7, -12.92]}
+  scale={[0.28, 8.7, 12.38]}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.ZijwandRabatLinks.geometry}
+  material={materials.Aluminium}
+  position={[-14.75, 8.7, -12.92]}
+  scale={[0.28, 8.7, 12.38]}
+/>
 </group>
   );
 }
 
-useGLTF.preload("./models/BasicVeranda10.glb");
+useGLTF.preload("./models/BasicVeranda11.glb");
