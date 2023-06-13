@@ -13,11 +13,14 @@ import { Vector3 } from "three";
 const ANIM_SPEED = 12;
 
 export function Veranda(props) {
-  const { nodes, materials } = useGLTF("./models/BasicVeranda8.glb");
+  const { nodes, materials } = useGLTF("./models/BasicVeranda11.glb");
 
     const { legs, aluminiumColor, verandaWidth, verandaDepth } = useConfigurator();
     
     const GootProfiel = useRef();
+    const GootProfielSluiterRechts = useRef();
+    const GootProfielSluiterLinks = useRef();
+    const MuurProfiel = useRef();
     const Huis = useRef();
     const leftLegs = useRef();
     const rightLegs = useRef();
@@ -32,25 +35,31 @@ export function Veranda(props) {
     const rightWindowPanel = useRef();
     const leftWindowPanel = useRef();
     const midWindowPanel = useRef();
+    const SpieGrootRechts = useRef();
+    const SpieGrootLinks = useRef();
+    const SpieGrootPolyRechts = useRef();
+    const SpieGrootPolyLinks = useRef();
+    const ZijwandRabatRechts = useRef();
+    const ZijwandRabatLinks = useRef();
     
     const scale = 10;
     var verandaWidthBase = 3
     var verandaDepthBase = 2.5
     // var DimensionWidthPolyPlate = 9.72
-    // var legsLeftRightPositionX = 14.58
-    var Poly04_posX = ((verandaWidth/verandaWidthBase-1)*-14.58) + 9.72
-    var Poly05_posX = ((verandaWidth/verandaWidthBase-1)*-14.58) + 9.72 * 2
-    var Poly06_posX = ((verandaWidth/verandaWidthBase-1)*-14.58) + 9.72 * 3
-    var Poly07_posX = ((verandaWidth/verandaWidthBase-1)*-14.58) + 9.72 * 4
-    var Poly08_posX = ((verandaWidth/verandaWidthBase-1)*-14.58) + 9.72 * 5
-    var Ligger04_posX = 4.86 + ((verandaWidth/verandaWidthBase-1)*14.58) - 9.72
-    var Ligger05_posX = 4.86 + ((verandaWidth/verandaWidthBase-1)*14.58) - 9.72 * 2
-    var Ligger06_posX = 4.86 + ((verandaWidth/verandaWidthBase-1)*14.58) - 9.72 * 3
-    var Ligger07_posX = 4.86 + ((verandaWidth/verandaWidthBase-1)*14.58) - 9.72 * 4
-    var Ligger08_posX = 4.86 + ((verandaWidth/verandaWidthBase-1)*14.58) - 9.72 * 5
-    var Window04_posX = 8.7 + ((verandaWidth/verandaWidthBase-1)*-14.58) + 9.40647
-    var Window05_posX = 8.7 + ((verandaWidth/verandaWidthBase-1)*-14.58) + 9.40647 * 2
-    var Window06_posX = 8.7 + ((verandaWidth/verandaWidthBase-1)*-14.58) + 9.40647 * 3
+    // var legsLeftRightPositionX = 14.75
+    var Poly04_posX = ((verandaWidth/verandaWidthBase-1)*-14.75) + 9.72
+    var Poly05_posX = ((verandaWidth/verandaWidthBase-1)*-14.75) + 9.72 * 2
+    var Poly06_posX = ((verandaWidth/verandaWidthBase-1)*-14.75) + 9.72 * 3
+    var Poly07_posX = ((verandaWidth/verandaWidthBase-1)*-14.75) + 9.72 * 4
+    var Poly08_posX = ((verandaWidth/verandaWidthBase-1)*-14.75) + 9.72 * 5
+    var Ligger04_posX = 4.86 + ((verandaWidth/verandaWidthBase-1)*14.75) - 9.72
+    var Ligger05_posX = 4.86 + ((verandaWidth/verandaWidthBase-1)*14.75) - 9.72 * 2
+    var Ligger06_posX = 4.86 + ((verandaWidth/verandaWidthBase-1)*14.75) - 9.72 * 3
+    var Ligger07_posX = 4.86 + ((verandaWidth/verandaWidthBase-1)*14.75) - 9.72 * 4
+    var Ligger08_posX = 4.86 + ((verandaWidth/verandaWidthBase-1)*14.75) - 9.72 * 5
+    var Window04_posX = 8.87 + ((verandaWidth/verandaWidthBase-1)*-14.75) + 9.40647
+    var Window05_posX = 8.87 + ((verandaWidth/verandaWidthBase-1)*-14.75) + 9.40647 * 2
+    var Window06_posX = 8.87 + ((verandaWidth/verandaWidthBase-1)*-14.75) + 9.40647 * 3
     var PolyEx_scaleY = 12.5 * verandaDepth / verandaDepthBase
     var LiggerEx_scaleY = 12.47 * verandaDepth / verandaDepthBase
     var PolyEx_posY = -12.83 -(verandaDepth - verandaDepthBase)/2*scale
@@ -68,9 +77,22 @@ export function Veranda(props) {
       const verandaDepthDelta = verandaDepth - verandaDepthBase;
 
       // GootProfiel Scaling
-      const targetScale = new Vector3(0.73, 0.7, 14.76 * verandaWidthScale);
+      const targetScale = new Vector3(1,1* verandaWidthScale,1);
       GootProfiel.current.scale.lerp(targetScale, delta * ANIM_SPEED);
       
+      // Gootprofiel sluiters positioning
+      const GootProfielSluiterRechtsPositioning = new Vector3(15.11 * verandaWidthScale, 21.02, 0.31);
+      GootProfielSluiterRechts.current.position.lerp(GootProfielSluiterRechtsPositioning, delta * ANIM_SPEED);
+      const GootProfielSluiterLinksPositioning = new Vector3(-14.99 * verandaWidthScale, 21.02, 0.31);
+      GootProfielSluiterLinks.current.position.lerp(GootProfielSluiterLinksPositioning, delta * ANIM_SPEED);
+
+      //Muurprofiel scaling
+      const MuurProfielScale = new Vector3(15 * verandaWidthScale, 0.8, 0.45);
+      MuurProfiel.current.scale.lerp(MuurProfielScale, delta * ANIM_SPEED);
+
+      //Muurprofiel positioning
+      const MuurProfielPositioning = new Vector3(0, 24.17 + verandaDepthDelta*0.7*2, -24.85 - verandaDepthDelta*scale);
+      MuurProfiel.current.position.lerp(MuurProfielPositioning, delta * ANIM_SPEED);
       // House scaling
       const HuisScale = new Vector3(17.5 * verandaWidthScale, 15, 15);
       Huis.current.scale.lerp(HuisScale, delta * ANIM_SPEED);
@@ -80,9 +102,9 @@ export function Veranda(props) {
       Huis.current.position.lerp(HuisPositioning, delta * ANIM_SPEED);
 
       // Legs positioning
-      const targetLeftPosition = new Vector3(-14.58 * verandaWidthScale, 10, 0);
+      const targetLeftPosition = new Vector3(-14.75 * verandaWidthScale, 10, 0);
       leftLegs.current.position.lerp(targetLeftPosition, delta * ANIM_SPEED);
-      const targetRightPosition = new Vector3(14.58 * verandaWidthScale, 10, 0);
+      const targetRightPosition = new Vector3(14.75 * verandaWidthScale, 10, 0);
       rightLegs.current.position.lerp(targetRightPosition, delta * ANIM_SPEED);
 
       // Poly Scaling
@@ -93,11 +115,11 @@ export function Veranda(props) {
       const Poly03Scale = new Vector3(0.6, 0.04, 12.5 * verandaDepthScale);
       Poly03.current.scale.lerp(Poly03Scale, delta * ANIM_SPEED);
       // Poly positioning
-      const Poly01Position = new Vector3(9.72 + ((verandaWidthScale-1)*14.58), 22.81 + verandaDepthDelta*0.7, -12.83 -verandaDepthDelta/2*scale);
+      const Poly01Position = new Vector3(9.72 + ((verandaWidthScale-1)*14.75), 22.81 + verandaDepthDelta*0.7, -12.83 -verandaDepthDelta/2*scale);
       Poly01.current.position.lerp(Poly01Position, delta * ANIM_SPEED);
-      const Poly02Position = new Vector3( ((verandaWidthScale-1)*-14.58), 22.81 + verandaDepthDelta*0.7, -12.83 -verandaDepthDelta/2*scale);
+      const Poly02Position = new Vector3( ((verandaWidthScale-1)*-14.75), 22.81 + verandaDepthDelta*0.7, -12.83 -verandaDepthDelta/2*scale);
       Poly02.current.position.lerp(Poly02Position, delta * ANIM_SPEED);
-      const Poly03Position = new Vector3(-9.72 + ((verandaWidthScale-1)*-14.58), 22.81 + verandaDepthDelta*0.7, -12.83 -verandaDepthDelta/2*scale);
+      const Poly03Position = new Vector3(-9.72 + ((verandaWidthScale-1)*-14.75), 22.81 + verandaDepthDelta*0.7, -12.83 -verandaDepthDelta/2*scale);
       Poly03.current.position.lerp(Poly03Position, delta * ANIM_SPEED);
 
       // Ligger Scaling
@@ -110,25 +132,53 @@ export function Veranda(props) {
       const Ligger02Scale = new Vector3(0.18, 8.24, 12.47 * verandaDepthScale);
       Ligger02.current.scale.lerp(Ligger02Scale, delta * ANIM_SPEED);
       // Ligger positioning
-      const EindLiggerRechtsPosition = new Vector3(14.58 + ((verandaWidthScale-1)*14.58), 21.76 + verandaDepthDelta*0.7, -12.97 -verandaDepthDelta/2*scale);
+      const EindLiggerRechtsPosition = new Vector3(14.75 + ((verandaWidthScale-1)*14.75), 21.76 + verandaDepthDelta*0.7, -12.97 -verandaDepthDelta/2*scale);
       EindLiggerRechts.current.position.lerp(EindLiggerRechtsPosition, delta * ANIM_SPEED);
-      const EindLiggerLinksPosition = new Vector3(-14.58 + ((verandaWidthScale-1)*-14.58), 21.76 + verandaDepthDelta*0.7, -12.97 -verandaDepthDelta/2*scale);
+      const EindLiggerLinksPosition = new Vector3(-14.75 + ((verandaWidthScale-1)*-14.75), 21.76 + verandaDepthDelta*0.7, -12.97 -verandaDepthDelta/2*scale);
       EindLiggerLinks.current.position.lerp(EindLiggerLinksPosition, delta * ANIM_SPEED);
-      const Ligger01Position = new Vector3(4.86 + ((verandaWidthScale-1)*14.58), 21.76 + verandaDepthDelta*0.7, -12.97 -verandaDepthDelta/2*scale);
+      const Ligger01Position = new Vector3(4.86 + ((verandaWidthScale-1)*14.75), 21.76 + verandaDepthDelta*0.7, -12.97 -verandaDepthDelta/2*scale);
       Ligger01.current.position.lerp(Ligger01Position, delta * ANIM_SPEED);
-      const Ligger02Position = new Vector3(-4.82 + ((verandaWidthScale-1)*-14.58), 21.76 + verandaDepthDelta*0.7, -12.97 -verandaDepthDelta/2*scale);
+      const Ligger02Position = new Vector3(-4.82 + ((verandaWidthScale-1)*-14.75), 21.76 + verandaDepthDelta*0.7, -12.97 -verandaDepthDelta/2*scale);
       Ligger02.current.position.lerp(Ligger02Position, delta * ANIM_SPEED);
 
+      // Zij spie en rabatdelen positioning
+      const SpieGrootRechtsPosition = new Vector3(14.75 + ((verandaWidthScale-1)*14.75), 17.34, -0.54);
+      SpieGrootRechts.current.position.lerp(SpieGrootRechtsPosition, delta * ANIM_SPEED);
+      const SpieGrootLinksPosition = new Vector3(-14.75 + ((verandaWidthScale-1)*-14.75), 17.34, -0.54);
+      SpieGrootLinks.current.position.lerp(SpieGrootLinksPosition, delta * ANIM_SPEED);
+      const SpieGrootPolyRechtsPosition = new Vector3(14.75 + ((verandaWidthScale-1)*14.75), 18.62 + verandaDepthDelta*0.7, -12.97 -verandaDepthDelta/2*scale);
+      SpieGrootPolyRechts.current.position.lerp(SpieGrootPolyRechtsPosition, delta * ANIM_SPEED);
+      const SpieGrootPolyLinksPosition = new Vector3(-14.75 + ((verandaWidthScale-1)*-14.75), 18.62 + verandaDepthDelta*0.7, -12.97 -verandaDepthDelta/2*scale);
+      SpieGrootPolyLinks.current.position.lerp(SpieGrootPolyLinksPosition, delta * ANIM_SPEED);
+      const ZijwandRabatRechtsPosition = new Vector3(14.75 + ((verandaWidthScale-1)*14.75), 8.7, -12.92 -verandaDepthDelta/2*scale);
+      ZijwandRabatRechts.current.position.lerp(ZijwandRabatRechtsPosition, delta * ANIM_SPEED);
+      const ZijwandRabatLinksPosition = new Vector3(-14.75 + ((verandaWidthScale-1)*-14.75), 8.7, -12.92 -verandaDepthDelta/2*scale);
+      ZijwandRabatLinks.current.position.lerp(ZijwandRabatLinksPosition, delta * ANIM_SPEED);
+
+      // Zij spie en rabatdelen scaling
+      const SpieGrootRechtsScale = new Vector3(1* verandaDepthScale, 1, 1 * verandaDepthScale);
+      SpieGrootRechts.current.scale.lerp(SpieGrootRechtsScale, delta * ANIM_SPEED);
+      const SpieGrootLinksScale = new Vector3(1* verandaDepthScale, 1, 1 * verandaDepthScale);
+      SpieGrootLinks.current.scale.lerp(SpieGrootLinksScale, delta * ANIM_SPEED);
+      const SpieGrootPolyRechtsScale = new Vector3(0.1, 1 * verandaDepthScale, 12.1 * verandaDepthScale);
+      SpieGrootPolyRechts.current.scale.lerp(SpieGrootPolyRechtsScale, delta * ANIM_SPEED);
+      const SpieGrootPolyLinksScale = new Vector3(0.1, 1 * verandaDepthScale, 12.1 * verandaDepthScale);
+      SpieGrootPolyLinks.current.scale.lerp(SpieGrootPolyLinksScale, delta * ANIM_SPEED);
+      const ZijwandRabatRechtsScale = new Vector3(0.28, 8.7, 12.38 * verandaDepthScale);
+      ZijwandRabatRechts.current.scale.lerp(ZijwandRabatRechtsScale, delta * ANIM_SPEED);
+      const ZijwandRabatLinksScale = new Vector3(0.28, 8.7, 12.38 * verandaDepthScale);
+      ZijwandRabatLinks.current.scale.lerp(ZijwandRabatLinksScale, delta * ANIM_SPEED);
+
       // Schuifpui frame Scaling
-      const windowFramePosition = new Vector3(11.33 * verandaWidthScale, 9.01, 4.41);
-      windowFrame.current.scale.lerp(windowFramePosition, delta * ANIM_SPEED);
+      const windowFrameScale = new Vector3(11.5 * verandaWidthScale, 9.01, 4.41);
+      windowFrame.current.scale.lerp(windowFrameScale, delta * ANIM_SPEED);
       // Schuifpui schuiven
       // rightWindowPanel
-      const rightWindowPanelPosition = new Vector3(8.7+ ((verandaWidthScale-1)*-14.58), 10.02, -0.38);
+      const rightWindowPanelPosition = new Vector3(8.87+ ((verandaWidthScale-1)*-14.75), 10.02, -0.38);
       rightWindowPanel.current.position.lerp(rightWindowPanelPosition, delta * ANIM_SPEED);
-      const leftWindowPanelPosition = new Vector3(-8.7+ ((verandaWidthScale-1)*-14.58), 10.02, 0.17);
+      const leftWindowPanelPosition = new Vector3(-8.87+ ((verandaWidthScale-1)*-14.75), 10.02, 0.17);
       leftWindowPanel.current.position.lerp(leftWindowPanelPosition, delta * ANIM_SPEED);
-      const midWindowPanelPosition = new Vector3(0.02+ ((verandaWidthScale-1)*-14.58), 10.02, -0.12);
+      const midWindowPanelPosition = new Vector3(0.02+ ((verandaWidthScale-1)*-14.75), 10.02, -0.12);
       midWindowPanel.current.position.lerp(midWindowPanelPosition, delta * ANIM_SPEED);
     });
 
@@ -141,10 +191,37 @@ export function Veranda(props) {
   receiveShadow
   geometry={nodes.GootProfiel.geometry}
   material={nodes.GootProfiel.material}
-  position={[0, 20.7, 0]}
-  rotation={[0, -Math.PI / 2, 0]}
-  scale={[0.73, 0.7, 14.76]}
+  position={[0, 21.01, 0.34]}
+  rotation={[Math.PI / 2, 0, -Math.PI / 2]}
+  scale={[1,1,1]}
   ref={GootProfiel}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.GootProfielSluiterRechts.geometry}
+  material={materials.Aluminium}
+  position={[15.11, 21.02, 0.31]}
+  rotation={[Math.PI / 2, 0, -Math.PI / 2]}
+  ref={GootProfielSluiterRechts}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.GootProfielSluiterLinks.geometry}
+  material={materials.Aluminium}
+  position={[-14.99, 21.02, 0.31]}
+  rotation={[Math.PI / 2, 0, -Math.PI / 2]}
+  ref={GootProfielSluiterLinks}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.MuurProfiel.geometry}
+  material={materials.Aluminium}
+  position={[0, 24.17, -24.85]}
+  scale={[15, 0.8, 0.45]}
+  ref={MuurProfiel}
 />
 <mesh
   castShadow
@@ -195,7 +272,7 @@ export function Veranda(props) {
       rotation={[0.14, 0, 0]}
       scale={[0.18, 8.24, LiggerEx_scaleY]}
     />
-    <group position={[Window04_posX, 10.02, -0.38]} scale={[11.33, 9.29, 4.41]}>
+    <group position={[Window04_posX, 10.02, -0.38]} scale={[11.45, 9.29, 4.41]}>
       <mesh
         castShadow
         receiveShadow
@@ -231,7 +308,7 @@ export function Veranda(props) {
       rotation={[0.14, 0, 0]}
       scale={[0.18, 8.24, LiggerEx_scaleY]}
     />
-    <group position={[Window05_posX, 10.02, -0.38]} scale={[11.33, 9.29, 4.41]}>
+    <group position={[Window05_posX, 10.02, -0.38]} scale={[11.45, 9.29, 4.41]}>
       <mesh
         castShadow
         receiveShadow
@@ -267,7 +344,7 @@ export function Veranda(props) {
       rotation={[0.14, 0, 0]}
       scale={[0.18, 8.24, LiggerEx_scaleY]}
     />
-    <group position={[Window06_posX, 10.02, -0.38]} scale={[11.33, 9.29, 4.41]}>
+    <group position={[Window06_posX, 10.02, -0.38]} scale={[11.45, 9.29, 4.41]}>
       <mesh
         castShadow
         receiveShadow
@@ -352,7 +429,7 @@ export function Veranda(props) {
   receiveShadow
   geometry={nodes.EindLiggerRechts.geometry}
   material={nodes.EindLiggerRechts.material}
-  position={[14.58, 21.76, -12.97]}
+  position={[14.75, 21.76, -12.97]}
   rotation={[0.14, 0, 0]}
   scale={[0.18, 8.24, 12.47]}
   ref={EindLiggerRechts}
@@ -372,7 +449,7 @@ export function Veranda(props) {
   receiveShadow
   geometry={nodes.EindLiggerLinks.geometry}
   material={nodes.EindLiggerLinks.material}
-  position={[-14.58, 21.76, -12.97]}
+  position={[-14.75, 21.76, -12.97]}
   rotation={[0.14, 0, 0]}
   scale={[0.18, 8.24, 12.47]}
   ref={EindLiggerLinks}
@@ -384,7 +461,7 @@ export function Veranda(props) {
       receiveShadow
       geometry={nodes.Legs01Left.geometry}
       material={materials.Aluminium}
-      position={[-14.58, 10, 0]}
+      position={[-14.75, 10, 0]}
       scale={[0.25, 10, 0.55]}
       ref={leftLegs}
     />
@@ -393,7 +470,7 @@ export function Veranda(props) {
       receiveShadow
       geometry={nodes.Legs01Right.geometry}
       material={materials.Aluminium}
-      position={[14.58, 10, 0]}
+      position={[14.75, 10, 0]}
       scale={[0.25, 10, 0.55]}
       ref={rightLegs}
       />
@@ -406,7 +483,7 @@ export function Veranda(props) {
       receiveShadow
       geometry={nodes.Legs01Left.geometry}
       material={materials.Aluminium}
-      position={[-14.58, 10, 0]}
+      position={[-14.75, 10, 0]}
       scale={[0.25, 10, 0.55]}
       ref={leftLegs}
     />
@@ -415,7 +492,7 @@ export function Veranda(props) {
       receiveShadow
       geometry={nodes.Legs01Right.geometry}
       material={materials.Aluminium}
-      position={[14.58, 10, 0]}
+      position={[14.75, 10, 0]}
       scale={[0.25, 10, 0.55]}
       ref={rightLegs}
       />
@@ -428,7 +505,7 @@ export function Veranda(props) {
       receiveShadow
       geometry={nodes.Legs01Left.geometry}
       material={materials.Aluminium}
-      position={[-14.58, 10, 0]}
+      position={[-14.75, 10, 0]}
       scale={[0.25, 10, 0.55]}
       ref={leftLegs}
     />
@@ -437,13 +514,13 @@ export function Veranda(props) {
       receiveShadow
       geometry={nodes.Legs01Right.geometry}
       material={materials.Aluminium}
-      position={[14.58, 10, 0]}
+      position={[14.75, 10, 0]}
       scale={[0.25, 10, 0.55]}
       ref={rightLegs}
       />
   </>
 )}
-<group position={[8.7, 10.02, -0.38]} scale={[11.33, 9.29, 4.41]} ref={rightWindowPanel}>
+<group position={[8.87, 10.02, -0.38]} scale={[11.45, 9.29, 4.41]} ref={rightWindowPanel}>
   <mesh
     castShadow
     receiveShadow
@@ -457,7 +534,7 @@ export function Veranda(props) {
     material={materials.MaterialGlass}
   />
 </group>
-<group position={[0.02, 10.02, -0.12]} scale={[11.33, 9.29, 4.41]} ref={midWindowPanel}>
+<group position={[0.02, 10.02, -0.12]} scale={[11.45, 9.29, 4.41]} ref={midWindowPanel}>
   <mesh
     castShadow
     receiveShadow
@@ -471,7 +548,7 @@ export function Veranda(props) {
     material={materials.MaterialGlass}
   />
 </group>
-<group position={[-8.7, 10.02, 0.17]} scale={[11.33, 9.29, 4.41]} ref={leftWindowPanel}>
+<group position={[-8.87, 10.02, 0.17]} scale={[11.45, 9.29, 4.41]} ref={leftWindowPanel}>
   <mesh
     castShadow
     receiveShadow
@@ -491,11 +568,65 @@ export function Veranda(props) {
   geometry={nodes.WindowFrame.geometry}
   material={nodes.WindowFrame.material}
   position={[0, 0.63, 0.15]}
-  scale={[11.33, 9.01, 4.41]}
+  scale={[11.5, 9.01, 4.41]}
   ref={windowFrame}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.SpieGrootRechts.geometry}
+  material={materials.Aluminium}
+  position={[14.75, 17.34, -0.54]}
+  rotation={[Math.PI / 2, 0, -Math.PI / 2]}
+  ref={SpieGrootRechts}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.SpieGrootLinks.geometry}
+  material={materials.Aluminium}
+  position={[-14.75, 17.34, -0.54]}
+  rotation={[Math.PI / 2, 0, -Math.PI / 2]}
+  ref={SpieGrootLinks}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.SpieGrootPolyRechts.geometry}
+  material={materials["PolyCarbonatSheets.Spie"]}
+  position={[14.75, 18.62, -12.97]}
+  scale={[0.1, 1, 12.1]}
+  ref={SpieGrootPolyRechts}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.SpieGrootPolyLinks.geometry}
+  material={materials["PolyCarbonatSheets.Spie"]}
+  position={[-14.75, 18.62, -12.97]}
+  scale={[0.1, 1, 12.1]}
+  ref={SpieGrootPolyLinks}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.ZijwandRabatRechts.geometry}
+  material={materials.Aluminium}
+  position={[14.75, 8.7, -12.92]}
+  scale={[0.28, 8.7, 12.38]}
+  ref={ZijwandRabatRechts}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.ZijwandRabatLinks.geometry}
+  material={materials.Aluminium}
+  position={[-14.75, 8.7, -12.92]}
+  scale={[0.28, 8.7, 12.38]}
+  ref={ZijwandRabatLinks}
 />
 </group>
   );
 }
 
-useGLTF.preload("./models/BasicVeranda8.glb");
+useGLTF.preload("./models/BasicVeranda11.glb");
