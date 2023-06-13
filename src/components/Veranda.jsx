@@ -35,6 +35,12 @@ export function Veranda(props) {
     const rightWindowPanel = useRef();
     const leftWindowPanel = useRef();
     const midWindowPanel = useRef();
+    const SpieGrootRechts = useRef();
+    const SpieGrootLinks = useRef();
+    const SpieGrootPolyRechts = useRef();
+    const SpieGrootPolyLinks = useRef();
+    const ZijwandRabatRechts = useRef();
+    const ZijwandRabatLinks = useRef();
     
     const scale = 10;
     var verandaWidthBase = 3
@@ -134,6 +140,34 @@ export function Veranda(props) {
       Ligger01.current.position.lerp(Ligger01Position, delta * ANIM_SPEED);
       const Ligger02Position = new Vector3(-4.82 + ((verandaWidthScale-1)*-14.75), 21.76 + verandaDepthDelta*0.7, -12.97 -verandaDepthDelta/2*scale);
       Ligger02.current.position.lerp(Ligger02Position, delta * ANIM_SPEED);
+
+      // Zij spie en rabatdelen positioning
+      const SpieGrootRechtsPosition = new Vector3(14.75 + ((verandaWidthScale-1)*14.75), 17.34, -0.54);
+      SpieGrootRechts.current.position.lerp(SpieGrootRechtsPosition, delta * ANIM_SPEED);
+      const SpieGrootLinksPosition = new Vector3(-14.75 + ((verandaWidthScale-1)*-14.75), 17.34, -0.54);
+      SpieGrootLinks.current.position.lerp(SpieGrootLinksPosition, delta * ANIM_SPEED);
+      const SpieGrootPolyRechtsPosition = new Vector3(14.75 + ((verandaWidthScale-1)*14.75), 18.62 + verandaDepthDelta*0.7, -12.97 -verandaDepthDelta/2*scale);
+      SpieGrootPolyRechts.current.position.lerp(SpieGrootPolyRechtsPosition, delta * ANIM_SPEED);
+      const SpieGrootPolyLinksPosition = new Vector3(-14.75 + ((verandaWidthScale-1)*-14.75), 18.62 + verandaDepthDelta*0.7, -12.97 -verandaDepthDelta/2*scale);
+      SpieGrootPolyLinks.current.position.lerp(SpieGrootPolyLinksPosition, delta * ANIM_SPEED);
+      const ZijwandRabatRechtsPosition = new Vector3(14.75 + ((verandaWidthScale-1)*14.75), 8.7, -12.92 -verandaDepthDelta/2*scale);
+      ZijwandRabatRechts.current.position.lerp(ZijwandRabatRechtsPosition, delta * ANIM_SPEED);
+      const ZijwandRabatLinksPosition = new Vector3(-14.75 + ((verandaWidthScale-1)*-14.75), 8.7, -12.92 -verandaDepthDelta/2*scale);
+      ZijwandRabatLinks.current.position.lerp(ZijwandRabatLinksPosition, delta * ANIM_SPEED);
+
+      // Zij spie en rabatdelen scaling
+      const SpieGrootRechtsScale = new Vector3(1* verandaDepthScale, 1, 1 * verandaDepthScale);
+      SpieGrootRechts.current.scale.lerp(SpieGrootRechtsScale, delta * ANIM_SPEED);
+      const SpieGrootLinksScale = new Vector3(1* verandaDepthScale, 1, 1 * verandaDepthScale);
+      SpieGrootLinks.current.scale.lerp(SpieGrootLinksScale, delta * ANIM_SPEED);
+      const SpieGrootPolyRechtsScale = new Vector3(0.1, 1 * verandaDepthScale, 12.1 * verandaDepthScale);
+      SpieGrootPolyRechts.current.scale.lerp(SpieGrootPolyRechtsScale, delta * ANIM_SPEED);
+      const SpieGrootPolyLinksScale = new Vector3(0.1, 1 * verandaDepthScale, 12.1 * verandaDepthScale);
+      SpieGrootPolyLinks.current.scale.lerp(SpieGrootPolyLinksScale, delta * ANIM_SPEED);
+      const ZijwandRabatRechtsScale = new Vector3(0.28, 8.7, 12.38 * verandaDepthScale);
+      ZijwandRabatRechts.current.scale.lerp(ZijwandRabatRechtsScale, delta * ANIM_SPEED);
+      const ZijwandRabatLinksScale = new Vector3(0.28, 8.7, 12.38 * verandaDepthScale);
+      ZijwandRabatLinks.current.scale.lerp(ZijwandRabatLinksScale, delta * ANIM_SPEED);
 
       // Schuifpui frame Scaling
       const windowFrameScale = new Vector3(11.5 * verandaWidthScale, 9.01, 4.41);
@@ -544,6 +578,7 @@ export function Veranda(props) {
   material={materials.Aluminium}
   position={[14.75, 17.34, -0.54]}
   rotation={[Math.PI / 2, 0, -Math.PI / 2]}
+  ref={SpieGrootRechts}
 />
 <mesh
   castShadow
@@ -552,6 +587,7 @@ export function Veranda(props) {
   material={materials.Aluminium}
   position={[-14.75, 17.34, -0.54]}
   rotation={[Math.PI / 2, 0, -Math.PI / 2]}
+  ref={SpieGrootLinks}
 />
 <mesh
   castShadow
@@ -560,6 +596,7 @@ export function Veranda(props) {
   material={materials["PolyCarbonatSheets.Spie"]}
   position={[14.75, 18.62, -12.97]}
   scale={[0.1, 1, 12.1]}
+  ref={SpieGrootPolyRechts}
 />
 <mesh
   castShadow
@@ -568,6 +605,7 @@ export function Veranda(props) {
   material={materials["PolyCarbonatSheets.Spie"]}
   position={[-14.75, 18.62, -12.97]}
   scale={[0.1, 1, 12.1]}
+  ref={SpieGrootPolyLinks}
 />
 <mesh
   castShadow
@@ -576,6 +614,7 @@ export function Veranda(props) {
   material={materials.Aluminium}
   position={[14.75, 8.7, -12.92]}
   scale={[0.28, 8.7, 12.38]}
+  ref={ZijwandRabatRechts}
 />
 <mesh
   castShadow
@@ -584,6 +623,7 @@ export function Veranda(props) {
   material={materials.Aluminium}
   position={[-14.75, 8.7, -12.92]}
   scale={[0.28, 8.7, 12.38]}
+  ref={ZijwandRabatLinks}
 />
 </group>
   );
